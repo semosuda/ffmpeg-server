@@ -104,11 +104,11 @@ def render():
                 f"alpha='if(lt(t\\,0.5)\\,t/0.5\\,1)':"
                 f"box=1:boxcolor={boxcolor}@0.8:boxborderw=20"
             )
-            filter_complex = (
-                f"[0:v]scale=1080:1920[bg];"
-                f" [bg]{drawtext}[v];"
-                f" [1:a]atrim=duration={d},asetpts=PTS-STARTPTS[a]"
-            )
+         filter_complex = (
+    f"[0:v]scale=720:1280[bg];"
+    f" [bg]{drawtext}[v];"
+    f" [1:a]atrim=duration={d},asetpts=PTS-STARTPTS[a]"
+)
         else:
             filter_complex = (
                 f"[0:v]scale=1080:1920[v];"
