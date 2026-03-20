@@ -11,13 +11,12 @@ app = Flask(__name__)
 KOREAN_FONT = None
 
 def find_korean_font():
-    fixed = [
+    paths = [
+        "/opt/render/project/fonts/NotoSansCJKkr-Regular.otf",
         "/usr/share/fonts/opentype/noto/NotoSansCJK-Regular.ttc",
-        "/usr/share/fonts/noto-cjk/NotoSansCJK-Regular.ttc",
-        "/usr/share/fonts/truetype/nanum/NanumGothic.ttf",
         "/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf",
     ]
-    for path in fixed:
+    for path in paths:
         if os.path.isfile(path):
             return path
     for match in glob.glob("/usr/share/fonts/**/*.ttf", recursive=True):
