@@ -70,7 +70,7 @@ def render():
         return jsonify({"error": "duration must be a positive number"}), 400
 
     text = random.choice([
-        '구독 \& 좋아요 눌러주세요',
+        '구독 & 좋아요 눌러주세요',
         '구독하고 알림 받으세요',
         '좋아요와 구독 부탁드려요',
         '구독과 좋아요 눌러주세요',
@@ -94,21 +94,21 @@ def render():
 
         if KOREAN_FONT:
             drawtext = (
-                f"drawtext="
+                "drawtext="
                 f"fontfile={KOREAN_FONT}:"
                 f"text='{text}':"
                 f"fontsize={fontsize}:"
-                f"fontcolor=white:"
-                f"x=(w-text_w)/2:"
+                "fontcolor=white:"
+                "x=(w-text_w)/2:"
                 f"y=h-{y_pos}+5*sin({freq}*PI*t):"
-                f"alpha='if(lt(t\\,0.5)\\,t/0.5\\,1)':"
+                "alpha='if(lt(t\\,0.5)\\,t/0.5\\,1)':"
                 f"box=1:boxcolor={boxcolor}@0.8:boxborderw=20"
             )
-         filter_complex = (
-    f"[0:v]scale=720:1280[bg];"
-    f" [bg]{drawtext}[v];"
-    f" [1:a]atrim=duration={d},asetpts=PTS-STARTPTS[a]"
-)
+            filter_complex = (
+                f"[0:v]scale=1080:1920[bg];"
+                f" [bg]{drawtext}[v];"
+                f" [1:a]atrim=duration={d},asetpts=PTS-STARTPTS[a]"
+            )
         else:
             filter_complex = (
                 f"[0:v]scale=1080:1920[v];"
@@ -123,6 +123,7 @@ def render():
             "-map", "[v]",
             "-map", "[a]",
             "-t", d,
+            "-preset", "ultrafast",
             "-c:v", "libx264",
             "-c:a", "aac",
             "-pix_fmt", "yuv420p",
